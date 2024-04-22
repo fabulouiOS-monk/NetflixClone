@@ -30,11 +30,13 @@ class HomeViewController: UIViewController {
 
         let headerView = HeroHeaderUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 450))
         homeFeedTable.tableHeaderView = headerView
+
+        getTrendingMovies()
     }
 
     private func configureNavBar() {
-        // TODO: Download netflix logo and add to assets.
         var image = UIImage(named: "netflixLogo")
+        image?.resizableImage(withCapInsets: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
         image = image?.withRenderingMode(.alwaysOriginal)
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: .done, target: .none, action: nil)
 
@@ -43,6 +45,17 @@ class HomeViewController: UIViewController {
             UIBarButtonItem(image: UIImage(systemName: "play.rectangle"), style: .done, target: .none, action: nil)
         ]
         navigationController?.navigationBar.tintColor = .white
+    }
+
+    private func getTrendingMovies() {
+        APICaller.shared.getTrendingMoview { results in
+            switch results {
+            case .success(let trendingMovies):
+                print(trendingMovies)
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 
     override func viewDidLayoutSubviews() {
