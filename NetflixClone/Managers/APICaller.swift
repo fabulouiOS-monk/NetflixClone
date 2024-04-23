@@ -22,19 +22,87 @@ class APICaller {
     
     private init() {}
 
-    func getTrendingMoview(completionHandler: @escaping (Result<[Movie], Error>) -> Void ) {
-        guard let url = URL(string: "\(Constants.baseUrl)/3/trending/all/day?api_key=\(Constants.apiKey)")
+    func getTrendingMoview(completionHandler: @escaping (Result<[Title], Error>) -> Void ) {
+        guard let url = URL(string: "\(Constants.baseUrl)/3/trending/movie/day?api_key=\(Constants.apiKey)")
         else { return }
         
         URLSession.shared.dataTask(with: URLRequest(url: url)) { trendingMovies, httpResponse, error in
             guard let data = trendingMovies, error == nil else { return }
 
             do {
-                let results = try JSONDecoder().decode(TrendingMovies.self, from: data)
+                let results = try JSONDecoder().decode(TrendingMoviesTitle.self, from: data)
                 completionHandler(.success(results.result))
             } catch {
-                print("Fetching fai led with error: \(error.localizedDescription)")
-                completionHandler(.failure(error))
+                print("Fetching failed with error: \(error.localizedDescription)")
+                completionHandler(.failure(APIError.failedToGetData))
+            }
+        }.resume()
+    }
+
+    func getTrendingTV(completionHandler: @escaping (Result<[Title], Error>) -> Void ) {
+        guard let url = URL(string: "\(Constants.baseUrl)/3/trending/tv/day?api_key=\(Constants.apiKey)")
+        else { return }
+        
+        URLSession.shared.dataTask(with: URLRequest(url: url)) { trendingMovies, httpResponse, error in
+            guard let data = trendingMovies, error == nil else { return }
+
+            do {
+                let results = try JSONDecoder().decode(TrendingMoviesTitle.self, from: data)
+                completionHandler(.success(results.result))
+            } catch {
+                print("Fetching failed with error: \(error.localizedDescription)")
+                completionHandler(.failure(APIError.failedToGetData))
+            }
+        }.resume()
+    }
+
+    func getUpcomingMovies(completionHandler: @escaping (Result<[Title], Error>) -> Void) {
+        guard let url = URL(string: "\(Constants.baseUrl)/3/movie/upcoming?api_key=\(Constants.apiKey)&language=en-US&page=1")
+        else { return }
+        
+        URLSession.shared.dataTask(with: URLRequest(url: url)) { trendingMovies, httpResponse, error in
+            guard let data = trendingMovies, error == nil else { return }
+
+            do {
+                let results = try JSONDecoder().decode(TrendingMoviesTitle.self, from: data)
+                completionHandler(.success(results.result))
+            } catch {
+                print("Fetching failed with error: \(error.localizedDescription)")
+                completionHandler(.failure(APIError.failedToGetData))
+            }
+        }.resume()
+    }
+
+    func getPopularMovies(completionHandler: @escaping (Result<[Title], Error>) -> Void) {
+        guard let url = URL(string: "\(Constants.baseUrl)/3/movie/popular?api_key=\(Constants.apiKey)&language=en-US&page=1")
+        else { return }
+        
+        URLSession.shared.dataTask(with: URLRequest(url: url)) { trendingMovies, httpResponse, error in
+            guard let data = trendingMovies, error == nil else { return }
+            
+            do {
+                let results = try JSONDecoder().decode(TrendingMoviesTitle.self, from: data)
+                completionHandler(.success(results.result))
+            } catch {
+                print("Fetching failed with error: \(error.localizedDescription)")
+                completionHandler(.failure(APIError.failedToGetData))
+            }
+        }.resume()
+    }
+
+    func getTopRatedMovies(completionHandler: @escaping (Result<[Title], Error>) -> Void) {
+        guard let url = URL(string: "\(Constants.baseUrl)/3/movie/top_rated?api_key=\(Constants.apiKey)&language=en-US&page=1")
+        else { return }
+        
+        URLSession.shared.dataTask(with: URLRequest(url: url)) { trendingMovies, httpResponse, error in
+            guard let data = trendingMovies, error == nil else { return }
+            
+            do {
+                let results = try JSONDecoder().decode(TrendingMoviesTitle.self, from: data)
+                completionHandler(.success(results.result))
+            } catch {
+                print("Fetching failed with error: \(error.localizedDescription)")
+                completionHandler(.failure(APIError.failedToGetData))
             }
         }.resume()
     }

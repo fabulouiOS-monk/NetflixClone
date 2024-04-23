@@ -21,6 +21,7 @@
 		697CC54A2BD626A8006FF0A9 /* HeroHeaderUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697CC5492BD626A8006FF0A9 /* HeroHeaderUIView.swift */; };
 		697CC54C2BD664D6006FF0A9 /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697CC54B2BD664D5006FF0A9 /* APICaller.swift */; };
 		697CC54E2BD66A59006FF0A9 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697CC54D2BD66A59006FF0A9 /* Movie.swift */; };
+		697CC5892BD76A90006FF0A9 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697CC5882BD76A90006FF0A9 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		697CC5492BD626A8006FF0A9 /* HeroHeaderUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroHeaderUIView.swift; sourceTree = "<group>"; };
 		697CC54B2BD664D5006FF0A9 /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
 		697CC54D2BD66A59006FF0A9 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		697CC5882BD76A90006FF0A9 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +137,7 @@
 		697CC5462BD61C19006FF0A9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				697CC5882BD76A90006FF0A9 /* Extensions.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -217,6 +220,7 @@
 				697CC5282BD6088A006FF0A9 /* ViewController.swift in Sources */,
 				697CC5382BD60BAA006FF0A9 /* MainTabBarViewController.swift in Sources */,
 				697CC5482BD61C3E006FF0A9 /* CollectionViewTableViewCell.swift in Sources */,
+				697CC5892BD76A90006FF0A9 /* Extensions.swift in Sources */,
 				697CC5242BD6088A006FF0A9 /* AppDelegate.swift in Sources */,
 				697CC54C2BD664D6006FF0A9 /* APICaller.swift in Sources */,
 				697CC5412BD613BA006FF0A9 /* DownloadViewController.swift in Sources */,

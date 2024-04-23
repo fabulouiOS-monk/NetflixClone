@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Movie: Codable {
+struct Title: Codable {
     let id: Int
     let media_type: String?
     let original_name: String?
@@ -19,6 +19,6 @@ struct Movie: Codable {
     let vote_average: Double
 }
 
-struct TrendingMovies: Codable {
-    let result: [Movie]
+struct TrendingMoviesTitle: Codable {
+    let result: [Title]
 }
