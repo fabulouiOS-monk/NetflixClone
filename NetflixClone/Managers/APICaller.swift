@@ -22,7 +22,7 @@ class APICaller {
     
     private init() {}
 
-    func getTrendingMoview(completionHandler: @escaping (Result<[Title], Error>) -> Void ) {
+    func getTrendingMovies(completionHandler: @escaping (Result<[Title], Error>) -> Void ) {
         guard let url = URL(string: "\(Constants.baseUrl)/3/trending/movie/day?api_key=\(Constants.apiKey)")
         else { return }
         
