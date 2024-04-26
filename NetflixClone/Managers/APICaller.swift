@@ -106,4 +106,24 @@ class APICaller {
             }
         }.resume()
     }
+
+    func getDiscoverMovies(completionHandler: @escaping (Result<[Title], Error>) -> Void) {
+        guard let url = URL(string: "\(Constants.baseUrl)/3/discover/movie?api_key=\(Constants.apiKey)&language=en-US&page=1")
+        else { return }
+
+        URLSession.shared.dataTask(with: URLRequest(url: url)) { discoverMovies, httpResponse, error in
+            guard let data = discoverMovies,
+                  error == nil else {
+                return
+            }
+
+            do {
+                let results = try JSONDecoder().decode(TrendingMoviesTitle.self, from: data)
+                completionHandler(.success(results.result))
+            } catch {
+                print("Failed to fetch discover movies with error: \(error.localizedDescription)")
+                completionHandler(.failure(APIError.failedToGetData))
+            }
+        }.resume()
+    }
 }
