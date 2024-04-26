@@ -7,11 +7,11 @@
 
 import UIKit
 
-class SearchResultViewController: UISearchController {
+class SearchResultViewController: UIViewController {
 
-    private var titles: [Title] = [Title]()
+    public var titles: [Title] = [Title]()
     
-    private let searchResultView: UICollectionView = {
+    public let searchResultView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: UIScreen.main.bounds.width / 3 - 10, height: 200)
         layout.minimumInteritemSpacing = 0
@@ -38,7 +38,7 @@ class SearchResultViewController: UISearchController {
 
 extension SearchResultViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        20
+        titles.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -46,8 +46,9 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
             return UICollectionViewCell()
         }
 
-        cell.backgroundColor = .blue
-        
+        let title = titles[indexPath.row]
+        cell.configure(with: title.poster_path ?? "")
+
         return cell
     }
 }

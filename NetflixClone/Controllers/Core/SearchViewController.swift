@@ -39,6 +39,7 @@ class SearchViewController: UIViewController {
         navigationController?.navigationBar.tintColor = .white
 
         fetchDiscoverMovies()
+        searchResultView.searchResultsUpdater = self
     }
 
     override func viewWillLayoutSubviews() {
@@ -57,6 +58,30 @@ class SearchViewController: UIViewController {
 
             case .failure(let error):
                 print("Error while fetching Discover: \(error.localizedDescription)")
+            }
+        }
+    }
+}
+
+extension SearchViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        let searchBar = searchController.searchBar
+        guard let query = searchBar.text,
+              !query.trimmingCharacters(in: .whitespaces).isEmpty,
+              query.trimmingCharacters(in: .whitespaces).count >= 3 else { return }
+        guard let resultController = searchController.searchResultsController as? SearchResultViewController
+        else { return }
+
+        APICaller.shared.searchQuery(with: query) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let title):
+                    resultController.titles = title
+                    resultController.searchResultView.reloadData()
+
+                case .failure(let error):
+                    print("Failed to fetch with error: \(error.localizedDescription)")
+                }
             }
         }
     }
