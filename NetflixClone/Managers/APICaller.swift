@@ -11,6 +11,8 @@ struct Constants {
     #warning("Never push API_KEY to github repo. Later will store the key in a more secure place.")
     static let apiKey = "***"
     static let baseUrl = "https://api.themoviedb.org"
+    static let Youtube_API_KEY = "***"
+    static let youtubeBaseUrl = "https://www.googleapis.com/youtube/v3/search"
 }
 
 enum APIError: Error {
@@ -148,5 +150,28 @@ class APICaller {
             }
         }.resume()
         
+    }
+
+    func getMovies(with query: String, completionHandler: @escaping (Result<VideoElement, Error>) -> Void) {
+        guard let query = query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {
+            return
+        }
+        guard let url = URL(string: "\(Constants.youtubeBaseUrl)?q=\(query)&key=\(Constants.Youtube_API_KEY)")
+        else { return }
+
+        URLSession.shared.dataTask(with: URLRequest(url: url)) { discoverMovies, httpResponse, error in
+            guard let data = discoverMovies,
+                  error == nil else {
+                return
+            }
+
+            do {
+                let results = try JSONDecoder().decode(YoutubeSearchResponse.self, from: data)
+                completionHandler(.success(results.items.first!))
+            } catch {
+                print("Failed to fetch discover movies with error: \(error.localizedDescription)")
+                completionHandler(.failure(APIError.failedToGetData))
+            }
+        }.resume()
     }
 }

@@ -28,6 +28,8 @@
 		697CC5942BD8D995006FF0A9 /* TitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697CC5932BD8D995006FF0A9 /* TitleTableViewCell.swift */; };
 		697CC5962BD8DC35006FF0A9 /* TitleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697CC5952BD8DC35006FF0A9 /* TitleViewModel.swift */; };
 		697CC5A42BDB66BD006FF0A9 /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697CC5A32BDB66BD006FF0A9 /* SearchResultViewController.swift */; };
+		697CC5A62BDCB210006FF0A9 /* YoutubeSearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697CC5A52BDCB210006FF0A9 /* YoutubeSearchResponse.swift */; };
+		697CC5A82BDCDAB3006FF0A9 /* TitlePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697CC5A72BDCDAB3006FF0A9 /* TitlePreviewViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +54,8 @@
 		697CC5932BD8D995006FF0A9 /* TitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTableViewCell.swift; sourceTree = "<group>"; };
 		697CC5952BD8DC35006FF0A9 /* TitleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleViewModel.swift; sourceTree = "<group>"; };
 		697CC5A32BDB66BD006FF0A9 /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
+		697CC5A52BDCB210006FF0A9 /* YoutubeSearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoutubeSearchResponse.swift; sourceTree = "<group>"; };
+		697CC5A72BDCDAB3006FF0A9 /* TitlePreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitlePreviewViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +131,7 @@
 				697CC5492BD626A8006FF0A9 /* HeroHeaderUIView.swift */,
 				697CC58C2BD8B97B006FF0A9 /* TitleCollectionViewCell.swift */,
 				697CC5932BD8D995006FF0A9 /* TitleTableViewCell.swift */,
+				697CC5A72BDCDAB3006FF0A9 /* TitlePreviewViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -135,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				697CC54D2BD66A59006FF0A9 /* Movie.swift */,
+				697CC5A52BDCB210006FF0A9 /* YoutubeSearchResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -260,6 +266,7 @@
 				697CC5382BD60BAA006FF0A9 /* MainTabBarViewController.swift in Sources */,
 				697CC58D2BD8B97B006FF0A9 /* TitleCollectionViewCell.swift in Sources */,
 				697CC5482BD61C3E006FF0A9 /* CollectionViewTableViewCell.swift in Sources */,
+				697CC5A82BDCDAB3006FF0A9 /* TitlePreviewViewController.swift in Sources */,
 				697CC5892BD76A90006FF0A9 /* Extensions.swift in Sources */,
 				697CC5942BD8D995006FF0A9 /* TitleTableViewCell.swift in Sources */,
 				697CC5242BD6088A006FF0A9 /* AppDelegate.swift in Sources */,
@@ -267,6 +274,7 @@
 				697CC5A42BDB66BD006FF0A9 /* SearchResultViewController.swift in Sources */,
 				697CC5962BD8DC35006FF0A9 /* TitleViewModel.swift in Sources */,
 				697CC5412BD613BA006FF0A9 /* DownloadViewController.swift in Sources */,
+				697CC5A62BDCB210006FF0A9 /* YoutubeSearchResponse.swift in Sources */,
 				697CC5262BD6088A006FF0A9 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
