@@ -83,4 +83,9 @@ class HeroHeaderUIView: UIView {
         super.layoutSubviews()
         heroImageView.frame = bounds
     }
+
+    public func configure(viewModel: TitleViewModel) {
+        guard let url = URL(string: "https://image.tmdb.org/t/p/w500\(viewModel.posterUrl)") else { return }
+        heroImageView.sd_setImage(with: url, completed: nil)
+    }
 }

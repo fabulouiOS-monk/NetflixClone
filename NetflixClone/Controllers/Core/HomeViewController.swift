@@ -25,6 +25,9 @@ class HomeViewController: UIViewController {
         return tableView
     }()
 
+    private var headerView: HeroHeaderUIView?
+    private var randomTitle: Title?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -36,7 +39,7 @@ class HomeViewController: UIViewController {
         
         configureNavBar()
 
-        let headerView = HeroHeaderUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 450))
+        headerView = HeroHeaderUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 450))
         homeFeedTable.tableHeaderView = headerView
  
     }
@@ -52,6 +55,20 @@ class HomeViewController: UIViewController {
             UIBarButtonItem(image: UIImage(systemName: "play.rectangle"), style: .done, target: .none, action: nil)
         ]
         navigationController?.navigationBar.tintColor = .white
+    }
+
+    private func configureHeaderView() {
+        APICaller.shared.getTrendingMovies { [weak self] result in
+            switch result {
+            case .success(let titles):
+                let randomTitle = titles.randomElement()
+                self?.randomTitle = randomTitle
+                self?.headerView?.configure(viewModel: TitleViewModel(titleName: self?.randomTitle?.original_name ?? "",
+                                                                      posterUrl: self?.randomTitle?.poster_path ?? ""))
+            case .failure(let error):
+                print("Error while configuring Header view: \(error.localizedDescription)")
+            }
+        }
     }
 
     override func viewDidLayoutSubviews() {

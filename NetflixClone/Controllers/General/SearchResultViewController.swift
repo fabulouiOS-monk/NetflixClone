@@ -7,11 +7,17 @@
 
 import UIKit
 
+protocol SearchResultViewCellDelegate: AnyObject {
+    func searchResultViewCellDidTapCell(_ viewModel: TitlePreviewViewModel)
+}
+
 class SearchResultViewController: UIViewController {
 
     /// Can be used if TMDB is not working, I made use of OTT Details API.
 //    public var titles: [SearchResult] = [SearchResult]()
     public var titles: [Title] = [Title]()
+    
+    weak var delegate: SearchResultViewCellDelegate?
     
     public let searchResultView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -52,5 +58,23 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
         cell.configure(with: title.poster_path ?? "")
 
         return cell
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        
+        let title = titles[indexPath.row]
+        let titleName = title.original_name ?? title.original_title ?? ""
+
+        APICaller.shared.getMovies(with: titleName) { [weak self] result in
+            switch result {
+            case .success(let videoElement):
+                self?.delegate?.searchResultViewCellDidTapCell(TitlePreviewViewModel(title: titleName, youtubeVideo: videoElement, overviewText: title.overview ?? ""))
+ 
+            case .failure(let error):
+                print("Error: \(error.localizedDescription)")
+            }
+        }
+        
     }
 }

@@ -63,7 +63,7 @@ class SearchViewController: UIViewController {
     }
 }
 
-extension SearchViewController: UISearchResultsUpdating {
+extension SearchViewController: UISearchResultsUpdating, SearchResultViewCellDelegate {
     func updateSearchResults(for searchController: UISearchController) {
         let searchBar = searchController.searchBar
         guard let query = searchBar.text,
@@ -71,19 +71,30 @@ extension SearchViewController: UISearchResultsUpdating {
               query.trimmingCharacters(in: .whitespaces).count >= 3 else { return }
         guard let resultController = searchController.searchResultsController as? SearchResultViewController
         else { return }
-
+        
+        resultController.delegate = self
+        
         APICaller.shared.searchQuery(with: query) { result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let title):
                     resultController.titles = title
                     resultController.searchResultView.reloadData()
-
+                    
                 case .failure(let error):
                     print("Failed to fetch with error: \(error.localizedDescription)")
                 }
             }
         }
+    }
+
+    func searchResultViewCellDidTapCell(_ viewModel: TitlePreviewViewModel) {
+        DispatchQueue.main.async { [weak self] in
+            let vc = TitlePreviewViewController()
+            vc.configure(with: viewModel)
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
 
         //// OTT DETAILS API
 //        APICaller.shared.getMoviesOTT(with: query) { result in
@@ -97,7 +108,6 @@ extension SearchViewController: UISearchResultsUpdating {
 //                }
 //            }
 //        }
-    }
 }
 
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
@@ -120,5 +130,27 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         140
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+
+        let movie = titles[indexPath.row]
+        guard let titleName = movie.original_name ?? movie.original_title else { return }
+
+        APICaller.shared.getMovies(with: titleName) { [weak self] result in
+            switch result {
+            case .success(let videoElement):
+                DispatchQueue.main.async { [weak self] in
+                    let vc = TitlePreviewViewController()
+                    let viewModel = TitlePreviewViewModel(title: titleName, youtubeVideo: videoElement, overviewText: movie.overview ?? "")
+                    vc.configure(with: viewModel)
+                    self?.navigationController?.pushViewController(vc, animated: true)
+                }
+
+            case .failure(let error):
+                print("Error: \(error.localizedDescription)")
+            }
+        }
     }
 }
