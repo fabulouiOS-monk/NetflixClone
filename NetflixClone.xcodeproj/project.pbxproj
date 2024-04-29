@@ -30,6 +30,7 @@
 		697CC5A42BDB66BD006FF0A9 /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697CC5A32BDB66BD006FF0A9 /* SearchResultViewController.swift */; };
 		697CC5A62BDCB210006FF0A9 /* YoutubeSearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697CC5A52BDCB210006FF0A9 /* YoutubeSearchResponse.swift */; };
 		697CC5A82BDCDAB3006FF0A9 /* TitlePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697CC5A72BDCDAB3006FF0A9 /* TitlePreviewViewController.swift */; };
+		697CC5AA2BDCE067006FF0A9 /* TitlePreviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697CC5A92BDCE067006FF0A9 /* TitlePreviewViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		697CC5A32BDB66BD006FF0A9 /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
 		697CC5A52BDCB210006FF0A9 /* YoutubeSearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoutubeSearchResponse.swift; sourceTree = "<group>"; };
 		697CC5A72BDCDAB3006FF0A9 /* TitlePreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitlePreviewViewController.swift; sourceTree = "<group>"; };
+		697CC5A92BDCE067006FF0A9 /* TitlePreviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitlePreviewViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				697CC5952BD8DC35006FF0A9 /* TitleViewModel.swift */,
+				697CC5A92BDCE067006FF0A9 /* TitlePreviewViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -275,6 +278,7 @@
 				697CC5962BD8DC35006FF0A9 /* TitleViewModel.swift in Sources */,
 				697CC5412BD613BA006FF0A9 /* DownloadViewController.swift in Sources */,
 				697CC5A62BDCB210006FF0A9 /* YoutubeSearchResponse.swift in Sources */,
+				697CC5AA2BDCE067006FF0A9 /* TitlePreviewViewModel.swift in Sources */,
 				697CC5262BD6088A006FF0A9 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

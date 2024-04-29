@@ -7,11 +7,17 @@
 
 import UIKit
 
+protocol CollectionViewTableViewCellDelegate: AnyObject {
+    func collectionViewTableViewCellDidTapCell(_ cell: CollectionViewTableViewCell, viewModel: TitlePreviewViewModel )
+}
+
 class CollectionViewTableViewCell: UITableViewCell {
 
     static let identifier = "CollectionViewTableViewCell"
 
     private var titles: [Title] = [Title]() 
+
+    weak var delegate: CollectionViewTableViewCellDelegate?
 
     private let customCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -71,10 +77,15 @@ extension CollectionViewTableViewCell: UICollectionViewDelegate, UICollectionVie
             return
         }
 
-        APICaller.shared.getMovies(with: title + " trailer") { result in
+        APICaller.shared.getMovies(with: title + " trailer") { [weak self] result in
             switch result {
             case .success(let video):
-                print(video.id)
+                guard let self else { return }
+                let viewModel = TitlePreviewViewModel(title: title,
+                                                      youtubeVideo: video,
+                                                      overviewText: self.titles[indexPath.row].overview ?? "")
+                self.delegate?.collectionViewTableViewCellDidTapCell(self, viewModel: viewModel)
+ 
             case .failure(let error):
                 print("Failed to show video at index:\(indexPath) with error: \(error.localizedDescription)")
             }

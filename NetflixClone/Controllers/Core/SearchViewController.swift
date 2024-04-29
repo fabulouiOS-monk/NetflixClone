@@ -84,6 +84,19 @@ extension SearchViewController: UISearchResultsUpdating {
                 }
             }
         }
+
+        //// OTT DETAILS API
+//        APICaller.shared.getMoviesOTT(with: query) { result in
+//            DispatchQueue.main.async {
+//                switch result {
+//                case .success(let result):
+//                    resultController.titles = result
+//                    resultController.searchResultView.reloadData()
+//                case .failure(let error):
+//                    print(error.localizedDescription)
+//                }
+//            }
+//        }
     }
 }
 

@@ -9,6 +9,8 @@ import UIKit
 
 class SearchResultViewController: UIViewController {
 
+    /// Can be used if TMDB is not working, I made use of OTT Details API.
+//    public var titles: [SearchResult] = [SearchResult]()
     public var titles: [Title] = [Title]()
     
     public let searchResultView: UICollectionView = {

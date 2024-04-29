@@ -174,4 +174,29 @@ class APICaller {
             }
         }.resume()
     }
+
+//    func getMoviesOTT(with query: String, completionHandler: @escaping (Result<[SearchResult], Error>) -> Void) {
+//        guard let query = query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {
+//            return
+//        }
+//        let headers = [
+//            "X-RapidAPI-Key": "",
+//            "X-RapidAPI-Host": "ott-details.p.rapidapi.com"
+//        ]
+//        
+//        guard let url = URL(string: "https://ott-details.p.rapidapi.com/search?title=\(query)") else { return }
+//            var request = URLRequest(url: url)
+//            request.httpMethod = "GET"
+//            request.allHTTPHeaderFields = headers
+//            
+//        URLSession.shared.dataTask(with: request) { (data, response, error) in
+//            guard let data = data, error == nil else { return }
+//            do {
+//                let result = try JSONDecoder().decode(SearchResponse.self, from: data)
+//                completionHandler(.success(result.results ?? [SearchResult]()))
+//            } catch {
+//                print(error.localizedDescription)
+//            }
+//        }.resume()
+//    }
 }

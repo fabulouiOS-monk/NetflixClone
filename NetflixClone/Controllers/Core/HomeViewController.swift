@@ -38,7 +38,7 @@ class HomeViewController: UIViewController {
 
         let headerView = HeroHeaderUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 450))
         homeFeedTable.tableHeaderView = headerView
-
+ 
     }
 
     private func configureNavBar() {
@@ -79,6 +79,9 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                                                        for: indexPath) as? CollectionViewTableViewCell else {
             return UITableViewCell()
         }
+
+        /// To show up TitlePreviewViewController on click of any movie/ TV cell
+        cell.delegate = self
         
         switch indexPath.section {
         case Sections.TrendingMovies.rawValue:
@@ -159,5 +162,15 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         header.textLabel?.frame = CGRect(x: header.bounds.origin.x + 20, y: header.bounds.origin.y, width: 100, height: header.bounds.height)
         header.textLabel?.textColor = .white
         header.textLabel?.text = header.textLabel?.text?.capitalizeFirstLetter()
+    }
+}
+
+extension HomeViewController: CollectionViewTableViewCellDelegate {
+    func collectionViewTableViewCellDidTapCell(_ cell: CollectionViewTableViewCell, viewModel: TitlePreviewViewModel) {
+        DispatchQueue.main.async { [weak self] in
+            let vc = TitlePreviewViewController()
+            vc.configure(with: viewModel)
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }
     }
 }

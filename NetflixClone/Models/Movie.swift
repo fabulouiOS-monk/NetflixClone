@@ -22,3 +22,13 @@ struct Title: Codable {
 struct TrendingMoviesTitle: Codable {
     let result: [Title]
 }
+
+
+//// Struct for model data OTT details API
+//struct SearchResponse: Codable {
+//    let results: [SearchResult]?
+//}
+//
+//struct SearchResult: Codable {
+//    let imageurl: [String]?
+//}
