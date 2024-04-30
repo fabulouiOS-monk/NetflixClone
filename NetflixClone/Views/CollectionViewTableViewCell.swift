@@ -54,7 +54,19 @@ class CollectionViewTableViewCell: UITableViewCell {
             self?.customCollectionView.reloadData()
         }
     }
-} 
+
+    private func downloadTitle(index: IndexPath) {
+        let title = titles[index.row]
+        DataPersistenceManager.shared.downloadTitleWith(model: title) { result in
+            switch result {
+            case .success():
+                NotificationCenter.default.post(name: NSNotification.Name("downloaded"), object: nil)
+            case .failure(let error):
+                print("Error to download:\(error.localizedDescription)")
+            }
+        }
+    }
+}
 
 extension CollectionViewTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
     
@@ -90,5 +102,15 @@ extension CollectionViewTableViewCell: UICollectionViewDelegate, UICollectionVie
                 print("Failed to show video at index:\(indexPath) with error: \(error.localizedDescription)")
             }
         }
+    }
+
+    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemsAt indexPaths: [IndexPath], point: CGPoint) -> UIContextMenuConfiguration? {
+        let config = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
+            let downloadAction = UIAction(title: "Download", subtitle: nil, image: nil, identifier: nil, discoverabilityTitle: nil, state: .off) { action in
+                print("Download Tapped")
+            }
+            return UIMenu(title: "", subtitle: nil, image: nil, identifier: nil, options: .displayInline, children: [downloadAction])
+        }
+        return config
     }
 }
