@@ -49,6 +49,17 @@
 - Fetching data using async instead of completion handlers.
 
 
+## ScreenRecording and Refrence.
+Hi, I have taken refrence from https://github.com/amrhossam96/Netflix-clone to complete this project. And also TMDB ssl certificate was not working while I was building this project, so you will see commented code in my repo in few files, where I have tried OTT API to show the data instead of TMDB. So Don't worry I have seen the UI and functionalities working with the help of other API.
+
+### ScreenRecording:
+
+
+
+https://github.com/fabulouiOS-monk/NetflixClone/assets/60264030/80ffc911-64ad-47a4-8d7a-01c514533e14
+
+
+
 ## 🧑🏻 Author
 
 **Kailash Bora**
